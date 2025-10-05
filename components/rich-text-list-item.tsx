@@ -116,7 +116,7 @@ export function RichTextListItem({
       className="flex items-start gap-2 group py-1"
     >
       <button
-        className="cursor-grab active:cursor-grabbing text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity mt-1"
+        className="cursor-grab active:cursor-grabbing text-muted-foreground mt-1"
         {...attributes}
         {...listeners}
       >
