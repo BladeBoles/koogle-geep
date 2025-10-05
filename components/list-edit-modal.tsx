@@ -5,7 +5,7 @@ import { ListWithItems, ListItem } from '@/lib/types/database'
 import { RichTextListItem } from '@/components/rich-text-list-item'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { MoreVertical } from 'lucide-react'
+import { MoreVertical, ArrowLeft } from 'lucide-react'
 import {
   Dialog,
   DialogContent,
@@ -190,24 +190,38 @@ export function ListEditModal({ list, open, onOpenChange, onUpdate, onDelete, on
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent
+        className="max-w-full max-h-full h-screen w-screen top-0 left-0 translate-x-0 translate-y-0 rounded-none border-0 md:max-w-2xl md:w-[672px] md:max-h-[90vh] md:h-auto md:top-[50%] md:left-[50%] md:translate-x-[-50%] md:translate-y-[-50%] md:rounded-lg md:border overflow-y-auto"
+        showCloseButton={false}
+        hideOverlayOnMobile={true}
+      >
         <DialogHeader>
           <DialogTitle className="sr-only">
             {title || 'Edit List'}
           </DialogTitle>
           <div className="flex items-start justify-between">
-            <Input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Tab') {
-                  e.preventDefault()
-                  handleTitleTab()
-                }
-              }}
-              placeholder="Title"
-              className="border-0 p-0 text-lg font-medium focus-visible:ring-0 focus-visible:ring-offset-0"
-            />
+            <div className="flex items-center gap-2 flex-1">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-8 w-8 cursor-pointer md:hidden flex-shrink-0"
+                onClick={() => handleClose(false)}
+              >
+                <ArrowLeft className="h-5 w-5" />
+              </Button>
+              <Input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Tab') {
+                    e.preventDefault()
+                    handleTitleTab()
+                  }
+                }}
+                placeholder="Title"
+                className="border-0 p-0 text-lg font-medium focus-visible:ring-0 focus-visible:ring-offset-0"
+              />
+            </div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-8 w-8 cursor-pointer">
