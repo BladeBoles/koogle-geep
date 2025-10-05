@@ -34,7 +34,7 @@ export async function createNote() {
 export async function updateNote(note: Note) {
   const supabase = await createClient()
 
-  const updateData: any = {
+  const updateData: Record<string, unknown> = {
     title: note.title,
     content: note.content,
     position: note.position,

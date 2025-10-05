@@ -6,7 +6,7 @@ import { NotePreviewCard } from '@/components/note-preview-card'
 import { ListEditModal } from '@/components/list-edit-modal'
 import { NoteEditModal } from '@/components/note-edit-modal'
 import { Button } from '@/components/ui/button'
-import { Plus, List, FileText, ArrowUpDown } from 'lucide-react'
+import { List, FileText, ArrowUpDown } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -147,7 +147,7 @@ export default function AppPage() {
     loadData()
   }
 
-  const sortItems = (items: Array<{ type: 'list' | 'note', id: string, data: any, sort_order: number }>) => {
+  const sortItems = (items: Array<{ type: 'list' | 'note', id: string, data: ListWithItems | Note, sort_order: number }>) => {
     return [...items].sort((a, b) => {
       switch (sortBy) {
         case 'title-asc':

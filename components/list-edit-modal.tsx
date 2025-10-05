@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { ListWithItems, ListItem } from '@/lib/types/database'
 import { RichTextListItem } from '@/components/rich-text-list-item'
-import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { MoreVertical } from 'lucide-react'
@@ -32,10 +31,8 @@ import {
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
-  useSortable,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
 
 interface ListEditModalProps {
   list: ListWithItems

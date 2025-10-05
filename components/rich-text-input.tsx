@@ -12,7 +12,7 @@ interface RichTextInputProps {
   className?: string
 }
 
-export function RichTextInput({ content, onChange, placeholder, className }: RichTextInputProps) {
+export function RichTextInput({ content, onChange, className }: RichTextInputProps) {
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [

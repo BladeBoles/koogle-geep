@@ -34,7 +34,7 @@ export async function updateList(list: ListWithItems) {
   const supabase = await createClient()
 
   // Update list metadata
-  const updateData: any = {
+  const updateData: Record<string, unknown> = {
     title: list.title,
     position: list.position,
   }
