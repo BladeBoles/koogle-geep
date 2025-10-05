@@ -136,7 +136,7 @@ export function RichTextListItem({
       <Button
         variant="ghost"
         size="icon"
-        className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer mt-0.5"
+        className="h-6 w-6 cursor-pointer mt-0.5"
         onClick={() => onDelete(item.id)}
       >
         <X className="h-4 w-4" />
