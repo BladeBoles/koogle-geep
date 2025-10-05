@@ -258,8 +258,8 @@ export default function AppPage() {
                     item.type === 'list' ? (
                       <ListPreviewCard
                         key={item.id}
-                        list={item.data}
-                        onClick={() => setEditingList(item.data)}
+                        list={item.data as ListWithItems}
+                        onClick={() => setEditingList(item.data as ListWithItems)}
                         onPin={() => handleTogglePinList(item.id, item.data.is_pinned)}
                         onArchive={() => handleArchiveList(item.id)}
                         onDelete={() => handleDeleteList(item.id)}
@@ -267,8 +267,8 @@ export default function AppPage() {
                     ) : (
                       <NotePreviewCard
                         key={item.id}
-                        note={item.data}
-                        onClick={() => setEditingNote(item.data)}
+                        note={item.data as Note}
+                        onClick={() => setEditingNote(item.data as Note)}
                         onPin={() => handleTogglePinNote(item.id, item.data.is_pinned)}
                         onArchive={() => handleArchiveNote(item.id)}
                         onDelete={() => handleDeleteNote(item.id)}
@@ -289,8 +289,8 @@ export default function AppPage() {
                     item.type === 'list' ? (
                       <ListPreviewCard
                         key={item.id}
-                        list={item.data}
-                        onClick={() => setEditingList(item.data)}
+                        list={item.data as ListWithItems}
+                        onClick={() => setEditingList(item.data as ListWithItems)}
                         onPin={() => handleTogglePinList(item.id, item.data.is_pinned)}
                         onArchive={() => handleArchiveList(item.id)}
                         onDelete={() => handleDeleteList(item.id)}
@@ -298,8 +298,8 @@ export default function AppPage() {
                     ) : (
                       <NotePreviewCard
                         key={item.id}
-                        note={item.data}
-                        onClick={() => setEditingNote(item.data)}
+                        note={item.data as Note}
+                        onClick={() => setEditingNote(item.data as Note)}
                         onPin={() => handleTogglePinNote(item.id, item.data.is_pinned)}
                         onArchive={() => handleArchiveNote(item.id)}
                         onDelete={() => handleDeleteNote(item.id)}
