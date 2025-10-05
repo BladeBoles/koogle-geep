@@ -30,9 +30,10 @@ interface NoteEditModalProps {
   onUpdate: (note: Note) => void
   onDelete: () => void
   onArchive: () => void
+  onTogglePin: () => void
 }
 
-export function NoteEditModal({ note, open, onOpenChange, onUpdate, onDelete, onArchive }: NoteEditModalProps) {
+export function NoteEditModal({ note, open, onOpenChange, onUpdate, onDelete, onArchive, onTogglePin }: NoteEditModalProps) {
   const [title, setTitle] = useState(note.title || '')
   const [content, setContent] = useState(note.content || '')
 
@@ -98,6 +99,12 @@ export function NoteEditModal({ note, open, onOpenChange, onUpdate, onDelete, on
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Tab') {
+                  e.preventDefault()
+                  editor?.commands.focus()
+                }
+              }}
               placeholder="Title"
               className="border-0 p-0 text-lg font-medium focus-visible:ring-0 focus-visible:ring-offset-0"
             />
@@ -108,6 +115,9 @@ export function NoteEditModal({ note, open, onOpenChange, onUpdate, onDelete, on
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => { onTogglePin(); onOpenChange(false); }} className="cursor-pointer">
+                  {note.is_pinned ?? false ? 'Unpin' : 'Pin'}
+                </DropdownMenuItem>
                 <DropdownMenuItem onClick={() => { onArchive(); onOpenChange(false); }} className="cursor-pointer">
                   Archive
                 </DropdownMenuItem>

@@ -34,19 +34,55 @@ export async function createNote() {
 export async function updateNote(note: Note) {
   const supabase = await createClient()
 
+  const updateData: any = {
+    title: note.title,
+    content: note.content,
+    position: note.position,
+  }
+
+  if (note.is_pinned !== undefined) updateData.is_pinned = note.is_pinned
+  if (note.sort_order !== undefined) updateData.sort_order = note.sort_order
+
   const { error } = await supabase
     .from('notes')
-    .update({
-      title: note.title,
-      content: note.content,
-      position: note.position,
-    })
+    .update(updateData)
     .eq('id', note.id)
 
   if (error) {
     return { error: error.message }
   }
 
+  revalidatePath('/app')
+  return { success: true }
+}
+
+export async function togglePinNote(id: string, isPinned: boolean) {
+  const supabase = await createClient()
+
+  const { error } = await supabase
+    .from('notes')
+    .update({ is_pinned: isPinned })
+    .eq('id', id)
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  revalidatePath('/app')
+  return { success: true }
+}
+
+export async function updateNoteOrder(notes: { id: string; sort_order: number }[]) {
+  const supabase = await createClient()
+
+  const updates = notes.map(note =>
+    supabase
+      .from('notes')
+      .update({ sort_order: note.sort_order })
+      .eq('id', note.id)
+  )
+
+  await Promise.all(updates)
   revalidatePath('/app')
   return { success: true }
 }

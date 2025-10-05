@@ -34,12 +34,17 @@ export async function updateList(list: ListWithItems) {
   const supabase = await createClient()
 
   // Update list metadata
+  const updateData: any = {
+    title: list.title,
+    position: list.position,
+  }
+
+  if (list.is_pinned !== undefined) updateData.is_pinned = list.is_pinned
+  if (list.sort_order !== undefined) updateData.sort_order = list.sort_order
+
   const { error: listError } = await supabase
     .from('lists')
-    .update({
-      title: list.title,
-      position: list.position,
-    })
+    .update(updateData)
     .eq('id', list.id)
 
   if (listError) {
@@ -115,6 +120,37 @@ export async function archiveList(id: string) {
     return { error: error.message }
   }
 
+  revalidatePath('/app')
+  return { success: true }
+}
+
+export async function togglePinList(id: string, isPinned: boolean) {
+  const supabase = await createClient()
+
+  const { error } = await supabase
+    .from('lists')
+    .update({ is_pinned: isPinned })
+    .eq('id', id)
+
+  if (error) {
+    return { error: error.message }
+  }
+
+  revalidatePath('/app')
+  return { success: true }
+}
+
+export async function updateListOrder(lists: { id: string; sort_order: number }[]) {
+  const supabase = await createClient()
+
+  const updates = lists.map(list =>
+    supabase
+      .from('lists')
+      .update({ sort_order: list.sort_order })
+      .eq('id', list.id)
+  )
+
+  await Promise.all(updates)
   revalidatePath('/app')
   return { success: true }
 }
