@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Keep Clone",
+  title: "Koogle Geep",
   description: "A Google Keep clone built with Next.js and Supabase",
 };
 
